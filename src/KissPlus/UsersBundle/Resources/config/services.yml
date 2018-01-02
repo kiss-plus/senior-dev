@@ -1,0 +1,14 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: true
+
+  KissPlus\UsersBundle\Application\:
+    resource: '../../Application/*'
+
+  KissPlus\UsersBundle\Infrastructure\:
+    resource: '../../Infrastructure/*'
+
+  KissPlus\UsersBundle\Application\TemplatingEngineInterface:
+    alias: KissPlus\UsersBundle\Infrastructure\TwigEngine

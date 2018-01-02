@@ -1,0 +1,9 @@
+KissPlus\UsersBundle\Domain\UsersList:
+  exclusion_policy: NONE
+  xml_root_name: users
+  properties:
+    users:
+      expose: true
+      xml_list:
+        entry_name: user
+        inline: true

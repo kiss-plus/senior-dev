@@ -1,0 +1,26 @@
+# config/doctrine/Product.orm.yml
+KissPlus\UsersBundle\Domain\User:
+    type: entity
+    id:
+        id:
+            type: guid
+            generator: { strategy: UUID }
+    fields:
+        name:
+            type: string
+            length: 20
+            nullable: false
+        password:
+            type: string
+            lenght: 30
+            nullable: false
+        email:
+            type: string
+            lenght: 30
+            nullable: false
+        active:
+            type: boolean
+            nullable: false
+        creationTime:
+            type: datetime_immutable
+            nullable: false

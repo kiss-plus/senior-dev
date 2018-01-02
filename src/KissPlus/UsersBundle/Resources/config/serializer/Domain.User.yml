@@ -1,0 +1,12 @@
+KissPlus\UsersBundle\Domain\User:
+  exclusion_policy: ALL
+  xml_root_name: user
+  properties:
+    name:
+      expose: true
+      xml_element:
+        cdata: false
+    email:
+      expose: true
+      xml_element:
+        cdata: false

@@ -1,0 +1,4 @@
+kiss_plus_users_bundle:
+    resource: "../src/KissPlus/UsersBundle/Resources/config/routing.yml"
+    prefix: /api/
+

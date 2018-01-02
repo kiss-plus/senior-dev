@@ -1,0 +1,60 @@
+version: '2'
+services:
+  users_web:
+    build:
+      context: ./../
+      dockerfile: docker/users/Dockerfile
+    image: kiss-plus-users:dev
+    volumes:
+      - ../:/var/www/html
+    depends_on:
+      - users_mysql
+    links:
+      - users_mysql
+    environment:
+      - DATABASE_URL=mysql://senior_dev_users:senior_dev_pass@users_mysql:3306/users
+    networks:
+      - senior_dev
+    labels:
+      - traefik.frontend.rule=Host=users.docker.loc
+
+  users_mysql:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpass
+      - MYSQL_USER=senior_dev_users
+      - MYSQL_PASSWORD=senior_dev_pass
+      - MYSQL_DATABASE=users
+    networks:
+      - senior_dev
+    ports:
+      - 3306:3306
+
+  proxy:
+    image: traefik
+    networks:
+      - senior_dev
+    ports:
+      - 80:80
+      - 8080:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./traefik/config:/etc/traefik
+
+  teamcity:
+    image: jetbrains/teamcity-server
+    networks:
+      - senior_dev
+    volumes:
+      - ./teamcity/data:/data/teamcity_server/datadir
+      - ./teamcity/logs:/opt/teamcity/logs
+    ports:
+      - 8111:8111
+
+networks:
+  senior_dev:
+    ipam:
+      config:
+        - subnet: 192.168.100.0/24
+          gateway: 192.168.100.1
+

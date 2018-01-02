@@ -1,0 +1,4 @@
+kiss_plus_users:
+    resource: "@KissPlusUsersBundle/Resources/config/routing.yml"
+    prefix:   /
+
